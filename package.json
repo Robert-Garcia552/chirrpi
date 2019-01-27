@@ -4,15 +4,10 @@
   "main": "server.js",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0",
-    "concurrently": "^4.1.0",
-    "express": "^4.16.4",
-    "firebase": "^5.8.1",
-    "nodemon": "^1.18.9"
+    "firebase": "^5.8.1"
   },
   "scripts": {
-    "start:server": "cd backend && nodemon server.js",
-    "start:client": "cd client && yarn start",
-    "start:dev": "concurrently \"yarn start:client\""
+    "start": "cd client && yarn start",
+    "predeploy": "cd client && yarn run build"
   }
 }
