@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "main": "server.js",
   "license": "MIT",
+  "homepage": "https://Robert-Garcia552.github.io/read-aloud",
   "dependencies": {
-    "firebase": "^5.8.1"
+    "firebase": "^5.8.1",
+    "gh-pages": "^2.0.1"
   },
   "scripts": {
-    "start": "cd client && yarn start",
-    "predeploy": "cd client && yarn run build"
+    "start": "cd client && yarn start"
   }
 }
