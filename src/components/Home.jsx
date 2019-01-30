@@ -100,7 +100,7 @@ export default class Home extends Component {
               We won't share your email.
             </h4>
             <p>
-              <Button content='Sign Up!' primary size="large" onClick={this.onSubmit}/>
+              <Button content='Sign Up!' primary size="large" onClick={this.onSubmit} disabled={this.state.error}/>
             </p>
             </Grid.Column>  
         </Grid.Row>
