@@ -28,8 +28,20 @@ export default class Home extends Component {
          error: false
         };
       }
+  
+  validateEmail(inputText)  {
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(this.state.email.match(mailformat)) {
+      this.setState({error: false})
+      return true;
+    } else  {
+      this.setState({error: true});
+      return false;
+    }
+  }
 
   handleChange = email => {
+    this.validateEmail(email)
     this.setState({
       email: email.target.value
     });
