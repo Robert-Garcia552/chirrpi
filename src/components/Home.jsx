@@ -50,7 +50,6 @@ export default class Home extends Component {
   onSubmit = async e => {
     e.preventDefault();
     const db = firebase.firestore();
-    // handle invalid email entry
     console.log(this.state.email)
     const emailRef = db.collection("emails").add({
         email: this.state.email
