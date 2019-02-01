@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
-import { Input, Button, Grid, Card, Segment, Reveal } from 'semantic-ui-react'
+import { Input, Button, Grid, Card, Message } from 'semantic-ui-react'
 import firebase from "./firebase";
-import { stringify } from '../../node_modules/postcss';
 
 const sampleAudio = require("../sampleJoanna.mp3")
 
@@ -80,55 +79,54 @@ export default class Home extends Component {
 
     if(emailSignUp)  {
       signUp = 
-      <p>Thanks for signing up!</p>
+      <Message positive>
+      Thanks for signing up! 
+      We will email you with updates periodically.
+      </Message>
     }
 
     return (
       <Card compact style={backDrop}>
-      <Grid verticalAlign='middle' textAlign='center' columns={2} relaxed='very' stackable divided style={row}>
-        <Grid.Row style={row}>
-          <Grid.Column style={{maxWidth: 450}}>
-            <h1>Read-Aloud</h1>
-            <i class="far fa-newspaper fa-5x"></i>
-            <h3>News today is too cluttered.
-            We're forced to listen to stories we're not interested in.</h3>
-            <i class="fas fa-headphones-alt fa-5x"></i>
-            <h3>Take the news with you on your commute!</h3> 
-            <h3>Hear the stories you want to hear.</h3>
-            <h3>Here's a Sample</h3>
-            <audio ref="audio" controls>
-              <source src={sampleAudio} type="audio/mpeg" ></source>
-            </audio> 
-          </Grid.Column>
-          <Grid.Column>
-            <h2>Enjoyed the sample?</h2>
-            <i class="fas fa-user-plus fa-5x"></i>
-            <h3>Sign up below and we will update you on our progress.</h3>
-            {signUp}
-    
-      <p style={emailField}>
-        <Input 
-          inverted 
-          placeholder="email address" 
-          size="large" 
-          onChange={this.handleChange}
-          value={this.state.email}
-          type="email"
-          error={this.state.error}
-        />
-      </p>
-      <h4>
-        We won't share or sell your email.
-      </h4>
-      <p>
-        <Button content='Sign Up!' primary size="large" onClick={this.onSubmit} disabled={this.state.disableSubmit}/>
-      </p>
-             
-            
-          
-            </Grid.Column>  
-        </Grid.Row>
-      </Grid>
+        <Grid verticalAlign='middle' textAlign='center' columns={2} relaxed='very' stackable divided style={row}>
+          <Grid.Row style={row}>
+              <Grid.Column style={{maxWidth: 450}}>
+                <h1>Read-Aloud</h1>
+                <i class="far fa-newspaper fa-5x"></i>
+                <h3>News today is too cluttered.
+                We're forced to listen to stories we're not interested in.</h3>
+                <i class="fas fa-headphones-alt fa-5x"></i>
+                <h3>Take the news with you on your commute!</h3> 
+                <h3>Hear the stories you want to hear.</h3>
+                <h3>Here's a Sample</h3>
+                <audio ref="audio" controls>
+                  <source src={sampleAudio} type="audio/mpeg" ></source>
+                </audio> 
+              </Grid.Column>
+              <Grid.Column>
+                <h2>Enjoyed the sample?</h2>
+                <i class="fas fa-user-plus fa-5x"></i>
+                <h3>Sign up below and we will update you on our progress.</h3>
+                {signUp}
+                <p style={emailField}>
+                  <Input 
+                    inverted 
+                    placeholder="email address" 
+                    size="large" 
+                    onChange={this.handleChange}
+                    value={this.state.email}
+                    type="email"
+                    error={this.state.error}
+                  />
+                </p>
+                <h4>
+                  We won't share or sell your email.
+                </h4>
+                <p>
+                  <Button content='Sign Up!' primary size="large" onClick={this.onSubmit} disabled={this.state.disableSubmit}/>
+                </p>
+              </Grid.Column>  
+          </Grid.Row>
+        </Grid>
       </Card>
       );
   }
