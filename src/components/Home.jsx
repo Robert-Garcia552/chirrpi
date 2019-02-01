@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import '../App.css';
-import { Input, Button, Grid, Segment } from 'semantic-ui-react'
+import { Input, Button, Grid, Card, Segment } from 'semantic-ui-react'
 import firebase from "./firebase";
 
 const sampleAudio = require("../sampleJoanna.mp3")
 
 const backDrop = {
-  height: '100%',
+  position: 'absolute',
+  margin: 'auto',
+  top: '0',
+  right: '0',
+  bottom: '0',
+  left: '0',
+  height: '70%',
+  width: '60%',
   opacity: '0.7',
   color: '#475d7f',
-  margin: 'auto'
 };
 
 const row = {
@@ -19,6 +25,11 @@ const row = {
 const emailField = {
   paddingTop: "15px"
 };
+
+const square = {
+  height: '200',
+  width: '200'
+}
 
 export default class Home extends Component {
     constructor() {
@@ -64,9 +75,9 @@ export default class Home extends Component {
 
   render() {     
     return (
-      <Segment compact style={backDrop}>
+      <Card compact style={backDrop}>
       <Grid verticalAlign='middle' textAlign='center' columns={2} relaxed='very' stackable divided style={row}>
-        <Grid.Row verticalAlign='middle' style={row}>
+        <Grid.Row style={row}>
           <Grid.Column style={{maxWidth: 450}}>
             <h1>Read-Aloud</h1>
             <i class="far fa-newspaper fa-5x"></i>
@@ -80,7 +91,7 @@ export default class Home extends Component {
               <source src={sampleAudio} type="audio/mpeg" ></source>
             </audio> 
           </Grid.Column>
-          <Grid.Column style={{maxWidth: 450}}>
+          <Grid.Column>
             <h3>Enjoyed the sample?</h3>
             <i class="fas fa-user-plus fa-5x"></i>
             <h3>Sign up below for updates.</h3>
@@ -104,7 +115,7 @@ export default class Home extends Component {
             </Grid.Column>  
         </Grid.Row>
       </Grid>
-      </Segment>
+      </Card>
       );
   }
 }
