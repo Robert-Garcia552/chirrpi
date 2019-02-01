@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import '../App.css';
-import { Input, Button, Grid, Card, Segment } from 'semantic-ui-react'
+import { Input, Button, Grid, Card, Segment, Reveal } from 'semantic-ui-react'
 import firebase from "./firebase";
+import { stringify } from '../../node_modules/postcss';
 
 const sampleAudio = require("../sampleJoanna.mp3")
 
@@ -32,17 +33,18 @@ export default class Home extends Component {
         this.state = {
          email: "",
          error: false,
-         disableSubmit: true
+         disableSubmit: true,
+         submitHit: false
         };
       }
   
   validateEmail(inputText)  {
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (this.state.email.match(mailformat)) {
-      this.setState({error: false, disableSubmit: false});
+      this.setState({error: false, disableSubmit: false, submitHit: false});
       return true;
     } else  {
-      this.setState({error: true, disableSubmit: true});
+      this.setState({error: true, disableSubmit: true, submitHit: false});
       return false;
     }
   }
@@ -65,11 +67,22 @@ export default class Home extends Component {
     });
     this.setState({
         email: "",
-        error: false
+        error: false,
+        disableSubmit: true,
+        submitHit: true
     });
   };
 
-  render() {     
+  render() {
+    const emailSignUp = this.state.submitHit;
+
+    let signUp;
+
+    if(emailSignUp)  {
+      signUp = 
+      <p>Thanks for signing up!</p>
+    }
+
     return (
       <Card compact style={backDrop}>
       <Grid verticalAlign='middle' textAlign='center' columns={2} relaxed='very' stackable divided style={row}>
@@ -91,23 +104,28 @@ export default class Home extends Component {
             <h2>Enjoyed the sample?</h2>
             <i class="fas fa-user-plus fa-5x"></i>
             <h3>Sign up below and we will update you on our progress.</h3>
-            <p style={emailField}>
-              <Input 
-                inverted 
-                placeholder="email address" 
-                size="large" 
-                onChange={this.handleChange}
-                value={this.state.email}
-                type="email"
-                error={this.state.error}
-              />
-            </p>
-            <h4>
-              We won't share or sell your email.
-            </h4>
-            <p>
-              <Button content='Sign Up!' primary size="large" onClick={this.onSubmit} disabled={this.state.disableSubmit}/>
-            </p>
+            {signUp}
+    
+      <p style={emailField}>
+        <Input 
+          inverted 
+          placeholder="email address" 
+          size="large" 
+          onChange={this.handleChange}
+          value={this.state.email}
+          type="email"
+          error={this.state.error}
+        />
+      </p>
+      <h4>
+        We won't share or sell your email.
+      </h4>
+      <p>
+        <Button content='Sign Up!' primary size="large" onClick={this.onSubmit} disabled={this.state.disableSubmit}/>
+      </p>
+             
+            
+          
             </Grid.Column>  
         </Grid.Row>
       </Grid>
