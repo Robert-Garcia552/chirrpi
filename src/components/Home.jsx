@@ -14,7 +14,7 @@ const backDrop = {
   left: '0',
   height: '70%',
   width: '60%',
-  opacity: '0.7',
+  opacity: '0.8',
   color: '#475d7f',
 };
 
@@ -26,27 +26,23 @@ const emailField = {
   paddingTop: "15px"
 };
 
-const square = {
-  height: '200',
-  width: '200'
-}
-
 export default class Home extends Component {
     constructor() {
         super();
         this.state = {
          email: "",
-         error: false
+         error: false,
+         disableSubmit: true
         };
       }
   
   validateEmail(inputText)  {
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if(this.state.email.match(mailformat)) {
-      this.setState({error: false})
+    if (this.state.email.match(mailformat)) {
+      this.setState({error: false, disableSubmit: false});
       return true;
     } else  {
-      this.setState({error: true});
+      this.setState({error: true, disableSubmit: true});
       return false;
     }
   }
@@ -81,8 +77,8 @@ export default class Home extends Component {
           <Grid.Column style={{maxWidth: 450}}>
             <h1>Read-Aloud</h1>
             <i class="far fa-newspaper fa-5x"></i>
-            <h3>News today is too cluttered.</h3>
-            <h3>We're forced to listen to stories we're not interested in.</h3>
+            <h3>News today is too cluttered.
+            We're forced to listen to stories we're not interested in.</h3>
             <i class="fas fa-headphones-alt fa-5x"></i>
             <h3>Take the news with you on your commute!</h3> 
             <h3>Hear the stories you want to hear.</h3>
@@ -92,9 +88,9 @@ export default class Home extends Component {
             </audio> 
           </Grid.Column>
           <Grid.Column>
-            <h3>Enjoyed the sample?</h3>
+            <h2>Enjoyed the sample?</h2>
             <i class="fas fa-user-plus fa-5x"></i>
-            <h3>Sign up below for updates.</h3>
+            <h3>Sign up below and we will update you on our progress.</h3>
             <p style={emailField}>
               <Input 
                 inverted 
@@ -107,10 +103,10 @@ export default class Home extends Component {
               />
             </p>
             <h4>
-              We won't share your email.
+              We won't share or sell your email.
             </h4>
             <p>
-              <Button content='Sign Up!' primary size="large" onClick={this.onSubmit} disabled={this.state.error}/>
+              <Button content='Sign Up!' primary size="large" onClick={this.onSubmit} disabled={this.state.disableSubmit}/>
             </p>
             </Grid.Column>  
         </Grid.Row>
