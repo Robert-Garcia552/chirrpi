@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-import { Input, Button, Grid, Card, Message } from 'semantic-ui-react'
+import { Input, Button, Grid, Card, Message, Responsive } from 'semantic-ui-react'
 import firebase from "./firebase";
 
 const sampleAudio = require("../sampleJoanna.mp3")
@@ -74,8 +74,10 @@ export default class Home extends Component {
 
   render() {
     const emailSignUp = this.state.submitHit;
+    const errorMsg = this.state.error
 
     let signUp;
+    let error;
 
     if(emailSignUp)  {
       signUp = 
@@ -84,12 +86,19 @@ export default class Home extends Component {
       We will email you with updates periodically.
       </Message>
     }
+    
+    if(errorMsg) {
+      error = 
+      <Message negative>
+        Please enter a valid email address.
+      </Message>
+    }
 
     return (
       <Card compact style={backDrop}>
         <Grid verticalAlign='middle' textAlign='center' columns={2} relaxed='very' stackable divided style={row}>
           <Grid.Row style={row}>
-              <Grid.Column style={{maxWidth: 450}}>
+              <Responsive as={Grid.Column} style={{maxWidth: 450}}>
                 <h1>Read-Aloud</h1>
                 <i class="far fa-newspaper fa-5x"></i>
                 <h3>News today is too cluttered.
@@ -101,12 +110,12 @@ export default class Home extends Component {
                 <audio ref="audio" controls>
                   <source src={sampleAudio} type="audio/mpeg" ></source>
                 </audio> 
-              </Grid.Column>
-              <Grid.Column>
+              </Responsive>
+              <Responsive as={Grid.Column}>
                 <h2>Enjoyed the sample?</h2>
                 <i class="fas fa-user-plus fa-5x"></i>
                 <h3>Sign up below and we will update you on our progress.</h3>
-                {signUp}
+                {signUp} {error}
                 <p style={emailField}>
                   <Input 
                     inverted 
@@ -124,7 +133,7 @@ export default class Home extends Component {
                 <p>
                   <Button content='Sign Up!' primary size="large" onClick={this.onSubmit} disabled={this.state.disableSubmit}/>
                 </p>
-              </Grid.Column>  
+              </Responsive>  
           </Grid.Row>
         </Grid>
       </Card>
