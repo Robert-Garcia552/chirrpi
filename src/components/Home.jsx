@@ -6,20 +6,38 @@ import firebase from "./firebase";
 const sampleAudio = require("../sampleJoanna.mp3")
 
 const backDrop = {
-  position: 'absolute',
-  margin: 'auto',
-  top: '0',
-  right: '0',
-  bottom: '0',
-  left: '0',
-  height: '70%',
-  width: '60%',
-  opacity: '0.8',
-  color: '#475d7f',
+    position: 'absolute',
+    /* center the div */
+    right: '0',
+    left: '0',
+    top: '0',
+    bottom: '0',
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    marginTop: '7em',
+    marginBottom: '7em',
+    /* give it dimensions */
+    height: '70%',
+    width: '60%',
+    opacity: '0.8',
+    overflowX: 'hidden',
+    overflowY: 'auto'
 };
 
+// position: 'absolute',
+// margin: 'auto',
+// top: '0',
+// right: '0',
+// bottom: '0',
+// left: '0',
+// height: '70%',
+// width: '60%',
+// opacity: '0.8',
+// color: '#475d7f',
+
 const row = {
-  height: '100%'
+  height: '100%',
+  overFlowY: 'auto'
 }
 
 const emailField = {
@@ -95,10 +113,10 @@ export default class Home extends Component {
     }
 
     return (
-      <Card compact style={backDrop}>
-        <Grid verticalAlign='middle' textAlign='center' columns={2} relaxed='very' stackable divided style={row}>
+      <Responsive as={Card} compact style={backDrop}>
+        <Responsive as={Grid} verticalAlign='middle' textAlign='center' columns={2} relaxed='very' stackable divided style={row}>
           <Grid.Row style={row}>
-              <Responsive as={Grid.Column} style={{maxWidth: 450}}>
+              <Grid.Column>
                 <h1>Read-Aloud</h1>
                 <i class="far fa-newspaper fa-5x"></i>
                 <h3>News today is too cluttered.
@@ -110,8 +128,8 @@ export default class Home extends Component {
                 <audio ref="audio" controls>
                   <source src={sampleAudio} type="audio/mpeg" ></source>
                 </audio> 
-              </Responsive>
-              <Responsive as={Grid.Column}>
+              </Grid.Column>
+              <Grid.Column>
                 <h2>Enjoyed the sample?</h2>
                 <i class="fas fa-user-plus fa-5x"></i>
                 <h3>Sign up below and we will update you on our progress.</h3>
@@ -133,10 +151,10 @@ export default class Home extends Component {
                 <p>
                   <Button content='Sign Up!' primary size="large" onClick={this.onSubmit} disabled={this.state.disableSubmit}/>
                 </p>
-              </Responsive>  
+              </Grid.Column>  
           </Grid.Row>
-        </Grid>
-      </Card>
+        </Responsive>
+      </Responsive>
       );
   }
 }
