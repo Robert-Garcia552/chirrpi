@@ -21,7 +21,8 @@ const backDrop = {
     width: '60%',
     opacity: '0.8',
     overflowX: 'hidden',
-    overflowY: 'auto'
+    overflowY: 'auto',
+    color: '#475d7f'
 };
 
 // position: 'absolute',
@@ -37,7 +38,8 @@ const backDrop = {
 
 const row = {
   height: '100%',
-  overFlowY: 'auto'
+  overFlowY: 'auto',
+  padding: '1em'
 }
 
 const emailField = {
@@ -56,12 +58,14 @@ export default class Home extends Component {
       }
   
   validateEmail(inputText)  {
-    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    let mailformat = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+    // /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     if (this.state.email.match(mailformat)) {
-      this.setState({error: false, disableSubmit: false, submitHit: false});
+      this.setState({error: false, disableSubmit: false});
       return true;
     } else  {
-      this.setState({error: true, disableSubmit: true, submitHit: false});
+      this.setState({error: true, disableSubmit: true});
       return false;
     }
   }
@@ -101,7 +105,6 @@ export default class Home extends Component {
       signUp = 
       <Message positive>
       Thanks for signing up! 
-      We will email you with updates periodically.
       </Message>
     }
     
@@ -117,10 +120,8 @@ export default class Home extends Component {
         <Responsive as={Grid} verticalAlign='middle' textAlign='center' columns={2} relaxed='very' stackable divided style={row}>
           <Grid.Row style={row}>
               <Grid.Column>
-                <h1>Read-Aloud</h1>
-                <i class="far fa-newspaper fa-5x"></i>
-                <h3>News today is too cluttered.
-                We're forced to listen to stories we're not interested in.</h3>
+                <h1>Chirrp</h1>
+                <h3>News today is too cluttered. We're forced to listen to stories we're not interested in or bad radio while we're driving. With Chirrp you can select specific stories that you're passionate about to listen to while you commute.</h3>
                 <i class="fas fa-headphones-alt fa-5x"></i>
                 <h3>Take the news with you on your commute!</h3> 
                 <h3>Hear the stories you want to hear.</h3>
@@ -136,7 +137,7 @@ export default class Home extends Component {
                 {signUp} {error}
                 <p style={emailField}>
                   <Input 
-                    inverted 
+                    focus 
                     placeholder="email address" 
                     size="large" 
                     onChange={this.handleChange}
@@ -149,7 +150,13 @@ export default class Home extends Component {
                   We won't share or sell your email.
                 </h4>
                 <p>
-                  <Button content='Sign Up!' primary size="large" onClick={this.onSubmit} disabled={this.state.disableSubmit}/>
+                  <Button 
+                    content='Sign Up!' 
+                    primary size="large" 
+                    onClick={this.onSubmit} 
+                    disabled={this.state.disableSubmit}
+                    onKeyDown={this.handleChange}
+                  />
                 </p>
               </Grid.Column>  
           </Grid.Row>
