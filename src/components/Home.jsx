@@ -39,7 +39,9 @@ const backDrop = {
 const row = {
   height: '100%',
   overFlowY: 'auto',
-  padding: '1em'
+  padding: '1em',
+  paddingTop: '4em',
+  boxSizing: 'padding-box'
 }
 
 const emailField = {
