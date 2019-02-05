@@ -40,7 +40,7 @@ const row = {
   height: '100%',
   overFlowY: 'auto',
   padding: '1em',
-  paddingTop: '4em',
+  paddingTop: '2em',
   boxSizing: 'padding-box'
 }
 
@@ -75,25 +75,36 @@ export default class Home extends Component {
   handleChange = email => {
     this.validateEmail(email)
     this.setState({
-      email: email.target.value
+      email: email.target.value,
+      submitHit: false
     });
   };
 
   onSubmit = async e => {
     e.preventDefault();
-    const db = firebase.firestore();
-    console.log(this.state.email)
-    const emailRef = db.collection("emails").add({
-        email: this.state.email
-    }).then(ref => {
-      console.log('Added document with ID: ', ref.id);
-    });
-    this.setState({
-        email: "",
-        error: false,
-        disableSubmit: true,
-        submitHit: true
-    });
+    if(this.validateEmail(this.state.email)) {
+      const db = firebase.firestore();
+      console.log(this.state.email)
+      const emailRef = db.collection("emails").add({
+          email: this.state.email
+      }).then(ref => {
+        console.log('Added document with ID: ', ref.id);
+      });
+      this.setState({
+          email: "",
+          error: false,
+          disableSubmit: true,
+          submitHit: true
+      });
+    } else {
+        console.log('it worked')
+        this.setState({
+          email: "",
+          error: true,
+          disableSubmit: true,
+          submitHit: false
+      })
+    }
   };
 
   render() {
@@ -118,13 +129,13 @@ export default class Home extends Component {
     }
 
     return (
-      <Responsive as={Card} compact style={backDrop}>
+      <Responsive as={Card} style={backDrop}>
         <Responsive as={Grid} verticalAlign='middle' textAlign='center' columns={2} relaxed='very' stackable divided style={row}>
-          <Grid.Row style={row}>
+          <Grid.Row >
               <Grid.Column>
-                <h1>Chirrp</h1>
-                <h3>News today is too cluttered. We're forced to listen to stories we're not interested in or bad radio while we're driving. With Chirrp you can select specific stories that you're passionate about to listen to while you commute.</h3>
-                <i class="fas fa-headphones-alt fa-5x"></i>
+                <h1>Chirrpi</h1>
+                <h3>News today is too cluttered. We're forced to listen to stories we're not interested in or bad radio while we're driving. With Chirrpi, you can select specific text articles, that you're passionate about, to listen to on the go.</h3>
+                <i className="fas fa-headphones-alt fa-5x"></i>
                 <h3>Take the news with you on your commute!</h3> 
                 <h3>Hear the stories you want to hear.</h3>
                 <h3>Here's a Sample</h3>
@@ -134,7 +145,7 @@ export default class Home extends Component {
               </Grid.Column>
               <Grid.Column>
                 <h2>Enjoyed the sample?</h2>
-                <i class="fas fa-user-plus fa-5x"></i>
+                <i className="fas fa-user-plus fa-5x"></i>
                 <h3>Sign up below and we will update you on our progress.</h3>
                 {signUp} {error}
                 <p style={emailField}>
