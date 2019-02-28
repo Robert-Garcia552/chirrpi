@@ -54,7 +54,7 @@ export default class Home extends Component {
         this.state = {
          email: "",
          error: false,
-         disableSubmit: true,
+         quant: true,
          submitHit: false
         };
       }
@@ -64,13 +64,13 @@ export default class Home extends Component {
 
     // /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     if (this.state.email.match(mailformat)) {
-      this.setState({error: false, disableSubmit: false});
+      this.setState({error: false, quant: false});
       return true;
     } else  {
-      this.setState({error: true, disableSubmit: true});
+      this.setState({error: true, quant: true});
       return false;
     }
-  }
+  };
 
   handleChange = email => {
     this.validateEmail(email)
@@ -93,7 +93,7 @@ export default class Home extends Component {
       this.setState({
           email: "",
           error: false,
-          disableSubmit: true,
+          quant: true,
           submitHit: true
       });
     } else {
@@ -101,7 +101,7 @@ export default class Home extends Component {
         this.setState({
           email: "",
           error: true,
-          disableSubmit: true,
+          quant: true,
           submitHit: false
       })
     }
@@ -167,7 +167,7 @@ export default class Home extends Component {
                     content='Sign Up!' 
                     primary size="large" 
                     onClick={this.onSubmit} 
-                    disabled={this.state.disableSubmit}
+                    disabled={this.state.quant}
                     onKeyDown={this.handleChange}
                   />
                 </p>
